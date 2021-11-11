@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.container {
+  margin-top: 50px;
+}
+
+.header {
+  text-align: center;
+  font-weight: 700;
+}
+
+.hotelsName {
+  text-align: center;
+}
+
+.primaryButton {
+  margin: 10px !important;
+}
+
+.secondaryButton {
+  margin: 10px !important;
+}
+
+.buttons {
+  align-self: center;
+}

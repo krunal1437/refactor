@@ -10,67 +10,108 @@ import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import Row from 'react-bootstrap/Row'
 import hotels from './hotels';
+import './index.css';
 
 function App() {
-  const [hotel1Color, setHotel1Color] = useState('text-primary');
-  const [hotel2Color, setHotel2Color] = useState('text-primary');
-  const [hotel3Color, setHotel3Color] = useState('text-primary');
+  const [hotelColor, setHotelColor] = useState('text-primary');
 
-  const options = {
+  const hotel1options = {
     title: {
-      text: 'My chart'
+      text: hotels[0].brandId
+    },
+    xAxis: {
+      categories: ['2017', '2018', '2019', '2020', '2021']
     },
     series: [{
-      data: [1, 2, 3]
+      type: 'spline',
+      name: 'year',
+      data: [1, 2, 3, 3, 5]
     }]
   }
 
+  const hotel2options = {
+    title: {
+      text: hotels[1].brandId
+    },
+    xAxis: {
+      categories: ['Jan-Mar', 'Apr-June', 'July-Sep', 'Oct-Dec']
+    },
+    series: [{
+      data: [11, 5, 24, 9],
+      name: 'Rooms available',
+      type: 'column',
+    }],
+  }
+
+  const hotel3options = {
+    title: {
+      text: hotels[2].brandId
+    },
+    series: [{
+      data: [{
+        y: 55,
+        name: 'Filled'
+      },
+      {
+        y: 38,
+        name: 'Empty'
+      },
+      {
+        y: 7,
+        name: 'Renovation'
+      }],
+      type: 'pie',
+      name: 'Rooms'
+    }]
+  }
+
+  const ButtonComponent = () => {
+    return (
+      <div className="buttons">
+        <Button size='sm' className="primaryButton" variant='primary' onClick={() => setHotelColor('text-primary')}>Primary Color</Button>
+        <Button size='sm' className="secondaryButton" variant='secondary' onClick={() => setHotelColor('text-secondary')}>Secondary Color</Button>
+      </div>
+    );
+  }
+
   return (
-    <Container>
+    <Container className="container">
       <Card>
-        <Card.Header>Welcome To Your Dashboard</Card.Header>
+        <Card.Header className="header">Welcome To Your Dashboard</Card.Header>
+        <ButtonComponent />
         <Row>
           <Col>
             <Card>
-              <Card.Header>{hotels[0].name} 
-                <Button size='sm' variant='primary' onClick={() => setHotel1Color('text-primary')}>Primary Color</Button>
-                <Button size='sm' variant='secondary' onClick={() => setHotel1Color('text-secondary')}>Secondary Color</Button>
-              </Card.Header>
-              <Card.Body className={hotel1Color}>
+              <Card.Header>{hotels[0].name}</Card.Header>
+              <Card.Body className={hotelColor}>
                 <Card.Title>Welcome to the lovely {hotels[0].name}!</Card.Title>
                 <HighchartsReact
                   highcharts={Highcharts}
-                  options={options}
+                  options={hotel1options}
                 />
               </Card.Body>
             </Card>
           </Col>
           <Col>
             <Card>
-              <Card.Header>{hotels[1].name}
-                <Button size='sm' variant='primary' onClick={() => setHotel2Color('text-primary')}>Primary Color</Button>
-                <Button size='sm' variant='secondary' onClick={() => setHotel2Color('text-secondary')}>Secondary Color</Button>
-              </Card.Header>
-              <Card.Body className={hotel2Color}>
-              <Card.Title>Welcome to the lovely {hotels[1].name}!</Card.Title>
+              <Card.Header>{hotels[1].name}</Card.Header>
+              <Card.Body className={hotelColor}>
+                <Card.Title>Welcome to the lovely {hotels[1].name}!</Card.Title>
                 <HighchartsReact
                   highcharts={Highcharts}
-                  options={options}
+                  options={hotel2options}
                 />
               </Card.Body>
             </Card>
           </Col>
           <Col>
             <Card>
-              <Card.Header>{hotels[2].name}
-                <Button size='sm' variant='primary' onClick={() => setHotel3Color('text-primary')}>Primary Color</Button>
-                <Button size='sm' variant='secondary' onClick={() => setHotel3Color('text-secondary')}>Secondary Color</Button>
-              </Card.Header>
-              <Card.Body className={hotel3Color}>
-              <Card.Title>Welcome to the lovely {hotels[2].name}!</Card.Title>
-                <HighchartsReact 
+              <Card.Header>{hotels[2].name}</Card.Header>
+              <Card.Body className={hotelColor}>
+                <Card.Title>Welcome to the lovely {hotels[2].name}!</Card.Title>
+                <HighchartsReact
                   highcharts={Highcharts}
-                  options={options}
+                  options={hotel3options}
                 />
               </Card.Body>
             </Card>
